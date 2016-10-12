@@ -27,7 +27,7 @@ public:
 	int pathSize();
 	bool containsCheckpoint(Checkpoint);
 	void generateIndividual();
-	void removeLowestH();
+	//void removeLowestH();
 	void shiftToStart();
 	void addCheckpoint(Checkpoint);
 	void setCheckpoint(int, Checkpoint);

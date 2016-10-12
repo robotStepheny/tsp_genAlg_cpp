@@ -12,12 +12,15 @@
 
 using std::string;
 
-/* uncomment all references to Z if you want a 3D point */
+/* 	uncomment all references to Z if you want a 3D point 
+	I should really just inherit it..... gah
+*/
 
 class Checkpoint 
 {
 public:
 	Checkpoint();
+	Checkpoint(double, double);
 	Checkpoint(double, double, int);// double, int);
 	virtual ~Checkpoint();
 	double getX();

@@ -94,7 +94,8 @@ void GeneticAlgorithm::mutate(Path path)
 	for (int i = 0; i < path.pathSize(); i++)
 	{
 		if (rand() < mutationRate)
-		{						   
+		{		
+			int j = path.pathSize() * rand();				   
 			Checkpoint point1 = path.getCheckpoint(i);
 			Checkpoint point2 = path.getCheckpoint(j);
 

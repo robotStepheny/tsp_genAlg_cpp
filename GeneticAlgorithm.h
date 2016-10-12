@@ -14,9 +14,9 @@ class GeneticAlgorithm
 {
 public:
 	GeneticAlgorithm();
-	Population evolvePopulation(Population);
-	Path crossover(Path&, Path&);
-	void mutate(Path);
+	static Population evolvePopulation(Population);
+	static Path crossover(Path&, Path&);
+	static void mutate(Path);
 	static Path& tournamentSelection(Population);
 
 private:

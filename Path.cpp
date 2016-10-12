@@ -8,7 +8,7 @@
 #include "Path.h"
 #include <algorithm>
 #include <sstream>
-#include<iostream>
+#include <iostream>
 
 
 using namespace std;
@@ -31,9 +31,9 @@ Path::Path(int x)
    fitness = 0;
 	distance = 0;
 	
-	for (int i = 0; i < 25; i++)
+	for (int i = 0; i < CheckpointHolder::numberOfCheckpoints(); i++)
 	{
-		Checkpoint cp(-777, -777, -777, -777);  //arbritrary
+		Checkpoint cp(-777, -777);//, -777);  //arbritrary
 		path.push_back(cp);
 	}
 }
@@ -96,15 +96,16 @@ int Path::getDistance()
 	      Checkpoint end;
 
 		   start = path[i];
-		   //check whether or not we are done traversing path
-		   if (i + 1 < pathSize())
+		   end = path[(i + 1) % pathSize()];
+
+		   /*if (i + 1 < pathSize())
 		   {
-			   end = path[i+1];//if we are done, calculate from last point to beginning point
+			   end = path[i + 1];
 		   }
 		   else
 		   {
 			   end = path[0];
-		   }
+		   }*/
 
 		   int intermediateDist = start.distanceTo(end);
 		   totalPathDistance += intermediateDist;
@@ -124,11 +125,11 @@ int Path::pathSize()
 
 bool Path::containsCheckpoint(Checkpoint point)
 {
-	for (int i= 0; i < path.size(); i++)
+	for (int i= 0; i < pathSize(); i++)
 	{
 		if (path[i].getX() == point.getX() &&
 			path[i].getY() == point.getY() &&
-			path[i].getZ() == point.getZ() &&
+			//path[i].getZ() == point.getZ() &&
 			path[i].getImportance() == point.getImportance())
 			return true;
 	}
@@ -140,7 +141,7 @@ string Path::toString()
 	stringstream fullPath;
 	for (int i = 0; i < pathSize(); i++)
 	{
-		fullPath<<getCheckpoint(i).toString() << " -> ";
+		fullPath<<getCheckpoint(i).toString() << " " << i << " ->\n";
 	}
 	return fullPath.str();
 }
@@ -163,17 +164,17 @@ void Path::shiftToStart()
 
 void Path::removeLowestH()
 {
-	double nodeValues[25];
+	double nodeValues[CheckpointHolder::numberOfCheckpoints];
 	
 	//starting point is path[0] which we do not want to get rid of
-	for (int i = 1; i < 25; i++)
+	for (int i = 1; i < CheckpointHolder::numberOfCheckpoints; i++)
 	{
 		nodeValues[i] = path[i].getImportance()/(path[i-1].distanceTo(path[i]) + path[i].distanceTo(path[i+1]) - path[i-1].distanceTo(path[i+1]) );
 	}
 
 	//each point has a value now, find smallest:
 	int smallest = 1;
-	for (int i = 2; i < 25; i++)
+	for (int i = 2; i < CheckpointHolder::numberOfCheckpoints; i++)
 	{
 		if (nodeValues[i] < nodeValues[smallest])
 		{

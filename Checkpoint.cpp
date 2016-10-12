@@ -18,7 +18,14 @@ Checkpoint::Checkpoint()
 
 /* for 3D points, uncomment adding in Z -- currently set for 2D*/
 
-Checkpoint::Checkpoint(double x2, double y2, int i);//double z2, int i)
+Checkpoint::Checkpoint(double x2, double y2)
+{
+	x = x2;
+	y = y2;
+	importance = 0;
+}
+
+Checkpoint::Checkpoint(double x2, double y2, int i)//double z2, int i)
 {
 	x = x2;
 	y = y2;
@@ -69,7 +76,7 @@ double Checkpoint::distanceTo(Checkpoint point)
 string Checkpoint::toString()
 {
 	stringstream s;
-	s << "(" << x << ", " << y << ", " << z << ")" << "[" << importance << "]";
+	s << "(" << x << ", " << y << ")" << "[" << importance << "]";
 	return s.str();
 
 }
