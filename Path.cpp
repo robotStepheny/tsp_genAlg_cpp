@@ -41,7 +41,7 @@ Path::Path(int x)
 Path::Path(vector<Checkpoint> cph)
 {
    fitness = 0;
-	distance = 0;
+   distance = 0;
 	
    for (int i = 0; i < cph.size(); ++i)
    {
@@ -49,7 +49,7 @@ Path::Path(vector<Checkpoint> cph)
       fitness = 1/getDistance();
    }
    random_shuffle(path.begin(), path.end());
-	path = cph;
+   path = cph;
 }
 
 void Path::generateIndividual()
@@ -76,9 +76,10 @@ void Path::setCheckpoint(int pathPos, Checkpoint point)
 
 double Path::getFitness()
 {
-	//if fitness is 0
-	if (!fitness)
+	if (!fitness) //fitness is 0
+	{
 		fitness = 1/getDistance();
+	}
 	return fitness;
 }
 
@@ -89,7 +90,6 @@ int Path::getDistance()
 	{
 	   int totalPathDistance = 0;
 
-      //std::cout << "path size: " << pathSize() << std::endl;
 	   for (int i = 0; i < pathSize(); i++)
 	   {
 	      Checkpoint start = getCheckpoint(i);
@@ -98,22 +98,21 @@ int Path::getDistance()
 		   start = path[i];
 		   //check whether or not we are done traversing path
 		   if (i + 1 < pathSize())
+		   {
 			   end = path[i+1];//if we are done, calculate from last point to beginning point
+		   }
 		   else
+		   {
 			   end = path[0];
+		   }
 
 		   int intermediateDist = start.distanceTo(end);
-//		   if (intermediateDist == 0)
-//		   {
-//			   cout << "REPEAT NODES FOUND" << endl;
-//		   }
 		   totalPathDistance += intermediateDist;
 
 	   }
 
 		distance = totalPathDistance;
 	}
-   //std::cout << "path distance: " << distance << std::endl;
 
 	return distance;
 }
@@ -141,7 +140,7 @@ string Path::toString()
 	stringstream fullPath;
 	for (int i = 0; i < pathSize(); i++)
 	{
-		fullPath<<getCheckpoint(i).toString()<<" -> ";
+		fullPath<<getCheckpoint(i).toString() << " -> ";
 	}
 	return fullPath.str();
 }
@@ -152,26 +151,34 @@ void Path::shiftToStart()
 	for (int i = 0; i < getDistance(); i++)
 	{	//cannot have any points given with 0 importance
 		if (path[0].getImportance() != 0)
+		{
 			rotate(path.begin(), path.end() - 1, path.end());
+		}
 		else 
+		{
 			break;
+		}
 	}
 }
 
 void Path::removeLowestH()
 {
 	double nodeValues[25];
+	
 	//starting point is path[0] which we do not want to get rid of
 	for (int i = 1; i < 25; i++)
 	{
 		nodeValues[i] = path[i].getImportance()/(path[i-1].distanceTo(path[i]) + path[i].distanceTo(path[i+1]) - path[i-1].distanceTo(path[i+1]) );
 	}
+
 	//each point has a value now, find smallest:
 	int smallest = 1;
 	for (int i = 2; i < 25; i++)
 	{
 		if (nodeValues[i] < nodeValues[smallest])
+		{
 			smallest = i;
+		}
 	}
 	path.erase(path.begin() + smallest);
 	distance = 0;

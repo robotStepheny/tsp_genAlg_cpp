@@ -13,7 +13,8 @@
 
 using namespace std;
 
-class CheckpointHolder {
+class CheckpointHolder 
+{
 public:
 	static void addCheckpoint(Checkpoint);
 	static Checkpoint getCheckpoint(int);

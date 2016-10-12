@@ -16,11 +16,13 @@ Checkpoint::Checkpoint()
 
 }
 
-Checkpoint::Checkpoint(double x2, double y2, double z2, int i)
+/* for 3D points, uncomment adding in Z -- currently set for 2D*/
+
+Checkpoint::Checkpoint(double x2, double y2, int i);//double z2, int i)
 {
 	x = x2;
 	y = y2;
-	z = z2;
+	//z = z2;
 	importance = i;
 }
 
@@ -37,10 +39,10 @@ double Checkpoint::getY()
 	return y;
 }
 
-double Checkpoint::getZ()
+/*double Checkpoint::getZ()
 {
 	return z;
-}
+}*/
 
 void Checkpoint::setX(int val)
 {
@@ -57,12 +59,11 @@ double Checkpoint::distanceTo(Checkpoint point)
 {
 	double xDistance = abs (x - point.getX());
 	double yDistance = abs (y - point.getY());
-	//double zDistance = abs (z - point.getZ());
-	double uptime = ( 6 - point.getZ() + 6 - z ) / 0.7;
+	//double uptime = ( 6 - point.getZ() + 6 - z ) / 0.7;
 	
 	double distance = sqrt((xDistance*xDistance) + (yDistance*yDistance) ) / 2 ;
 
-	return distance + uptime;
+	return distance;// + uptime;
 }
 
 string Checkpoint::toString()

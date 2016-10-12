@@ -10,7 +10,8 @@
 
 #include "Population.h"
 #include "Path.h"
-class GeneticAlgorithm {
+class GeneticAlgorithm 
+{
 public:
 	GeneticAlgorithm();
 	Population evolvePopulation(Population);

@@ -12,24 +12,27 @@
 
 using std::string;
 
-class Checkpoint {
+/* uncomment all references to Z if you want a 3D point */
+
+class Checkpoint 
+{
 public:
 	Checkpoint();
-	Checkpoint(double, double, double, int);
+	Checkpoint(double, double, int);// double, int);
 	virtual ~Checkpoint();
 	double getX();
 	double getY();
-	double getZ();
+	//double getZ();
 	void setX(int);
 	int getImportance();
-	double distanceTo(Checkpoint point);
+	double distanceTo(Checkpoint);
 	string toString();
 
 private:
 
 	double x;
 	double y;
-	double z;
+	//double z;
 	int importance;
 
 };

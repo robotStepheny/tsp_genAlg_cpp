@@ -15,22 +15,23 @@
 
 using namespace std;
 
-class Path {
+class Path 
+{
 public:
-   Path();
+    Path();
 	Path(int);
 	Path(vector<Checkpoint>);
-	void generateIndividual();
 	Checkpoint getCheckpoint(int);
-	void setCheckpoint(int, Checkpoint);
 	double getFitness();
 	int getDistance();
 	int pathSize();
 	bool containsCheckpoint(Checkpoint);
-	string toString();
+	void generateIndividual();
 	void removeLowestH();
 	void shiftToStart();
 	void addCheckpoint(Checkpoint);
+	void setCheckpoint(int, Checkpoint);
+	string toString();
 
 private:
 	vector<Checkpoint> path;

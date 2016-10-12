@@ -11,7 +11,8 @@
 #include "Path.h"
 #include "CheckpointHolder.h"
 
-class Population {
+class Population 
+{
 public:
 	Population();
 	Population(int, bool);

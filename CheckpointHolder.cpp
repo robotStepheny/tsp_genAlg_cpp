@@ -14,7 +14,6 @@ vector<Checkpoint> CheckpointHolder::allCheckpoints;
 
 void CheckpointHolder::addCheckpoint(Checkpoint point)
 {
-    //cout << "adding cp: " << point.toString() << endl;
 	CheckpointHolder::allCheckpoints.push_back(Checkpoint(point));
 }
 

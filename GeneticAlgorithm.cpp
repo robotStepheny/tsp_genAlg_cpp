@@ -54,13 +54,18 @@ Path GeneticAlgorithm::crossover(Path& parentA, Path& parentB)
 	for (int i = 0; i < child.pathSize(); i++)
 	{
 		if (start < end && i > start && i < end)
+		{
 			child.setCheckpoint(i, parentA.getCheckpoint(i));
-		else if (start > end)
-			if (!(i < start && i > end))
-				child.setCheckpoint(i, parentA.getCheckpoint(i));
-	}
+		}
 
-	//cout << "Child pt. 1:  " << child.toString() << endl;
+		else if (start > end)
+		{
+			if (!(i < start && i > end))
+			{
+				child.setCheckpoint(i, parentA.getCheckpoint(i));
+			}
+		}
+	}
 
 	for(int i = 0; i < parentB.pathSize(); i++)
 	{
@@ -89,9 +94,7 @@ void GeneticAlgorithm::mutate(Path path)
 	for (int i = 0; i < path.pathSize(); i++)
 	{
 		if (rand() < mutationRate)
-		{
-			int j = (int)(rand() * path.pathSize());
-
+		{						   
 			Checkpoint point1 = path.getCheckpoint(i);
 			Checkpoint point2 = path.getCheckpoint(j);
 
